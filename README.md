@@ -1,0 +1,3 @@
+# EasyEncryption
+
+The .NET Framework provides a number of encryption routines. But ...
