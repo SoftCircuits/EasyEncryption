@@ -1,5 +1,11 @@
 # EasyEncryption
 
+[![NuGet version (SoftCircuits.EasyEncryption)](https://img.shields.io/nuget/v/SoftCircuits.EasyEncryption.svg?style=flat-square)](https://www.nuget.org/packages/SoftCircuits.EasyEncryption/)
+
+```
+Install-Package SoftCircuits.EasyEncryption
+```
+
 The .NET Framework provides a number of encryption routines. However, these routines generally require a bit of work to set up correctly. Use `EasyEncryption` to make these encryption routines more easily accessible.
 
 ## Encrypting a String
