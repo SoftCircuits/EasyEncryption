@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace EasyEncryption
+namespace SoftCircuits.EasyEncryption
 {
     /// <summary>
     /// Encryption algorithm types.

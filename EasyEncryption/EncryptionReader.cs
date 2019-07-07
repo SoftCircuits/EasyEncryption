@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace EasyEncryption
+namespace SoftCircuits.EasyEncryption
 {
     /// <summary>
     /// Class that provides streaming decryption functionality.

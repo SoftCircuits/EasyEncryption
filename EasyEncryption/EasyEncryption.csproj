@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
     <Copyright>Copyright © SoftCircuits</Copyright>
     <PackageId>SoftCircuits.EasyEncryption</PackageId>
     <Authors>WoodJonathan</Authors>
@@ -15,10 +15,12 @@
     <PackageTags>encryption decryption</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Wraps the .NET Framework encryption routines to provide easily accessible encryption and decryption.</Description>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>Renamed namespace from EasyEncryption to SoftCircuits.EasyEncryption.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\FullTextSearchQuery\LICENSE">
+    <None Include="..\License.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>

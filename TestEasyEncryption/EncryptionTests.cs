@@ -1,4 +1,4 @@
-using EasyEncryption;
+using SoftCircuits.EasyEncryption;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
