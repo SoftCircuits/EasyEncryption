@@ -1,5 +1,11 @@
 # EasyEncryption
 
+[![NuGet version (SoftCircuits.EasyEncryption)](https://img.shields.io/nuget/v/SoftCircuits.EasyEncryption.svg?style=flat-square)](https://www.nuget.org/packages/SoftCircuits.EasyEncryption/)
+
+```
+Install-Package SoftCircuits.EasyEncryption
+```
+
 The .NET Framework provides a number of encryption routines. However, these routines generally require a bit of work to set up correctly. Use `EasyEncryption` to make these encryption routines more easily accessible.
 
 ## Encrypting a String
@@ -9,8 +15,8 @@ The `Encrypt()` method can be used to encrypt a string. Use `DecryptString()` to
 ```cs
 Encryption encrypt = new Encryption("Password123", EncryptionAlgorithm.TripleDes);
 
-string message = "This is my message";
-string cipher = encrypt.Encrypt(message);
+string original = "This is my message";
+string cipher = encrypt.Encrypt(original);
 string result = encrypt.DecryptString(cipher);
 
 Debug.Assert(result == message);
@@ -34,7 +40,7 @@ Debug.Assert(resultInt == originalInt);
 Debug.Assert(resultDouble == originalDouble);
 ```
 
-## Encrypting Files
+## Streams
 
 `EasyEncryption` also provides the streaming classes `EncryptionWriter` and `EncryptionReader`. These classes work well when encrypting to (or decrypting from) files.
 
@@ -64,7 +70,7 @@ using (EncryptionReader reader = encrypt.CreateStreamReader(path))
 }
 ```
 
-Also, the `CreateStreamWriter()` and `CreateStreamReader()` methods are overloaded to accept a stream argument, allowing you to use custom streams. For example, you could use a `MemoryStream` to encrypt data to memory. This is demonstrated in the following example. It also uses the static method `EncodeBytesToString()` method to convert the results to a string. (Note that there is also a corresponding `DecodeBytesFromString()` method.)
+Also, the `CreateStreamWriter()` and `CreateStreamReader()` methods are overloaded to accept a stream argument, allowing you to use custom streams. For example, you could use a `MemoryStream` to encrypt data to memory. This is demonstrated in the following example. It also uses the static method `EncodeBytesToString()` method to convert the results to a string. (Note that there is also a corresponding static `DecodeBytesFromString()` method.)
 
 ```cs
 Encryption encrypt = new Encryption("Password123", EncryptionAlgorithm.TripleDes);
@@ -79,7 +85,6 @@ using (EncryptionWriter writer = encrypt.CreateStreamWriter(stream))
 }
 ```
 
-Note that the streaming classes are actually the most efficient way to encrypt and decrypt data. In fact the `Encrypt()` and decryption methods create an instance of `EncryptionWriter()` internally (using a `MemoryStream`), even when only encrypting or decrypting a single byte.
+Note that the streaming classes are actually the most efficient way to encrypt and decrypt data. In fact the `Encrypt()` and decryption methods create an instance of `EncryptionWriter` internally (using a `MemoryStream`), even when only encrypting or decrypting a single byte.
 
-In addition, it should be pointed out that the encrypted data produced by these routines include embedded encryption salt data, making the encrypted data slightly larger than it would otherwise be. However, when encrypting to a stream, this data would only be stored once regardless of the number of values added to the stream. The takeaway is that you can use the `Encrypt()` method for a simple encryption, but should use the stream methods for anything more complex.
-
+In addition, it should be pointed out that the encrypted results produced by these routines include embedded salt data, making the encrypted data slightly larger than it would otherwise be. However, when encrypting to a stream, this data would only be stored once regardless of the number of values added to the stream. The takeaway is that you can use the `Encrypt()` method for a simple encryption, but should use the streaming classes for anything more complex.
