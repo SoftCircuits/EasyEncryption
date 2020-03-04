@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2019 Jonathan Wood (www.softcircuits.com)
+﻿// Copyright (c) 2019-2020 Jonathan Wood (www.softcircuits.com)
 // Licensed under the MIT license.
 //
 using System;
@@ -75,20 +75,14 @@ namespace SoftCircuits.EasyEncryption
         /// </summary>
         /// <param name="bytes">The byte array to be converted.</param>
         /// <returns>Returns the converted string.</returns>
-        public static string EncodeBytesToString(byte[] bytes)
-        {
-            return Convert.ToBase64String(bytes);
-        }
+        public static string EncodeBytesToString(byte[] bytes) => Convert.ToBase64String(bytes);
 
         /// <summary>
         /// Converts a string to a byte array.
         /// </summary>
         /// <param name="s">The string to be converted.</param>
         /// <returns>Returns the converted byte array.</returns>
-        public static byte[] DecodeBytesFromString(string s)
-        {
-            return Convert.FromBase64String(s);
-        }
+        public static byte[] DecodeBytesFromString(string s) => Convert.FromBase64String(s);
 
         /// <summary>
         /// Constructs a new <c>Encryption</c> instance.
@@ -600,7 +594,7 @@ namespace SoftCircuits.EasyEncryption
         /// The encryption code supports all basic .NET data types in addition to <c>byte[]</c>
         /// and <c>string[]</c>. More complex data types are not supported.
         /// </remarks>
-        /// <param name="type">The data type to be tested</param>
+        /// <param name="type">The data type to be tested.</param>
         /// <returns>True if the specified type is supported. False otherwise.</returns>
         public static bool IsTypeSupported(Type type) => TypeInfoLookup.ContainsKey(type);
 
@@ -614,8 +608,7 @@ namespace SoftCircuits.EasyEncryption
         {
             if (value == null)
                 return null;
-            TypeInfo info;
-            if (TypeInfoLookup.TryGetValue(value.GetType(), out info))
+            if (TypeInfoLookup.TryGetValue(value.GetType(), out TypeInfo info))
                 return info.Encrypt(this, value);
             throw new ArgumentException(string.Format("Cannot encrypt value : Data type '{0}' is not supported", value.GetType()));
         }
@@ -629,8 +622,7 @@ namespace SoftCircuits.EasyEncryption
         /// <returns>Returns the decrypted value.</returns>
         public object Decrypt(string encryptedValue, Type targetType)
         {
-            TypeInfo info;
-            if (TypeInfoLookup.TryGetValue(targetType, out info))
+            if (TypeInfoLookup.TryGetValue(targetType, out TypeInfo info))
                 return info.Decrypt(this, encryptedValue);
             throw new ArgumentException(string.Format("Cannot decrypt value : Data type '{0}' is not supported", targetType));
         }
@@ -651,7 +643,7 @@ namespace SoftCircuits.EasyEncryption
         /// Generates a salt that contains a cryptographically strong sequence of random values.
         /// </summary>
         /// <returns>The generated salt value.</returns>
-        protected byte[] CreateSalt()
+        private byte[] CreateSalt()
         {
             byte[] salt = new byte[SaltLength];
             using (RNGCryptoServiceProvider generator = new RNGCryptoServiceProvider())
@@ -665,7 +657,7 @@ namespace SoftCircuits.EasyEncryption
         /// Generates a pseudorandom key and initialization vector from the current password and the
         /// given salt.
         /// </summary>
-        /// <param name="algorithm">SymmetricAlgorithm being used to encrypt.</param>
+        /// <param name="algorithm"><see cref="SymmetricAlgorithm"></see> being used to encrypt.</param>
         /// <param name="salt">The salt used to derive the key and initialization vector.</param>
         /// <param name="key">Returns the generated key.</param>
         /// <param name="iv">Returns the generated initialization vector.</param>

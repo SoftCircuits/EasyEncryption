@@ -5,22 +5,28 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <Copyright>Copyright © SoftCircuits</Copyright>
+    <Copyright>Copyright © 2019-2020 SoftCircuits</Copyright>
     <PackageId>SoftCircuits.EasyEncryption</PackageId>
-    <Authors>WoodJonathan</Authors>
+    <Authors>Jonathan Wood</Authors>
     <Company>SoftCircuits</Company>
     <PackageProjectUrl>https://github.com/SoftCircuits/EasyEncryption</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SoftCircuits/EasyEncryption</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>encryption decryption</PackageTags>
+    <PackageTags>encryption decryption simplified-encryption aes des rc2 rijndael tripledes</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Wraps the .NET Framework encryption routines to provide easily accessible encryption and decryption.</Description>
-    <Version>1.0.1</Version>
-    <PackageReleaseNotes>Renamed namespace from EasyEncryption to SoftCircuits.EasyEncryption.</PackageReleaseNotes>
+    <Version>1.0.2</Version>
+    <PackageReleaseNotes>Minor tweaks; Added package icon.</PackageReleaseNotes>
+    <PackageIcon>Logo_64x64.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\License.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\Logo_64x64.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
