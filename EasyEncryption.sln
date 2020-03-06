@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyEncryption", "EasyEncryption\EasyEncryption.csproj", "{B85893ED-15A9-4699-945F-9F8F8085A403}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyEncryption", "EasyEncryption\EasyEncryption.csproj", "{B85893ED-15A9-4699-945F-9F8F8085A403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEasyEncryption", "TestEasyEncryption\TestEasyEncryption.csproj", "{EB2A0071-6476-4D2A-97B5-60B10AA038D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyEncryption.Tests", "EasyEncryption.Tests\EasyEncryption.Tests.csproj", "{45847591-CF2E-4BC6-9FA5-15032CF2A574}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{B85893ED-15A9-4699-945F-9F8F8085A403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B85893ED-15A9-4699-945F-9F8F8085A403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B85893ED-15A9-4699-945F-9F8F8085A403}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB2A0071-6476-4D2A-97B5-60B10AA038D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB2A0071-6476-4D2A-97B5-60B10AA038D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB2A0071-6476-4D2A-97B5-60B10AA038D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB2A0071-6476-4D2A-97B5-60B10AA038D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45847591-CF2E-4BC6-9FA5-15032CF2A574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45847591-CF2E-4BC6-9FA5-15032CF2A574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45847591-CF2E-4BC6-9FA5-15032CF2A574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45847591-CF2E-4BC6-9FA5-15032CF2A574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

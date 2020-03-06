@@ -12,11 +12,11 @@
     <PackageProjectUrl>https://github.com/SoftCircuits/EasyEncryption</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SoftCircuits/EasyEncryption</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>encryption decryption simplified-encryption aes des rc2 rijndael tripledes</PackageTags>
+    <PackageTags>encryption decryption simplified-encryption aes des rc2 rijndael tripledes cryptography</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Description>Wraps the .NET Framework encryption routines to provide easily accessible encryption and decryption.</Description>
-    <Version>1.0.2</Version>
-    <PackageReleaseNotes>Minor tweaks; Added package icon.</PackageReleaseNotes>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>Minor tweaks; Modified package icon.</PackageReleaseNotes>
     <PackageIcon>Logo_64x64.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>
