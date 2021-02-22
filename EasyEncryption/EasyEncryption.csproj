@@ -1,11 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <TargetFrameworks>net5.0;netstandard2.0</TargetFrameworks>
+    <Nullable>annotations</Nullable>
+    <Nullable Condition="'$(TargetFramework)' == 'net5.0'">enable</Nullable>
+    <LangVersion>9.0</LangVersion>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <Copyright>Copyright © 2019-2020 SoftCircuits</Copyright>
+    <Copyright>Copyright © 2019-2021 SoftCircuits</Copyright>
     <PackageId>SoftCircuits.EasyEncryption</PackageId>
     <Authors>Jonathan Wood</Authors>
     <Company>SoftCircuits</Company>
@@ -14,9 +18,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>encryption decryption simplified-encryption aes des rc2 rijndael tripledes cryptography</PackageTags>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Description>Wraps the .NET Framework encryption routines to provide easily accessible encryption and decryption.</Description>
-    <Version>1.0.3</Version>
-    <PackageReleaseNotes>Minor tweaks; Modified package icon.</PackageReleaseNotes>
+    <Description>Wraps the .NET Framework encryption routines to provide easily accessible encryption and decryption. Now targets .NET Standard 2.0 or .NET 5.0, and supports nullable reference types.</Description>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>Now targets .NET Standard 2.0 or .NET 5.0, and supports nullable reference types.</PackageReleaseNotes>
     <PackageIcon>Logo_64x64.png</PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>

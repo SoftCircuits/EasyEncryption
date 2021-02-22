@@ -1,9 +1,10 @@
-﻿// Copyright (c) 2019-2020 Jonathan Wood (www.softcircuits.com)
+﻿// Copyright (c) 2019-2021 Jonathan Wood (www.softcircuits.com)
 // Licensed under the MIT license.
 //
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Security.Cryptography;
 
 namespace SoftCircuits.EasyEncryption
@@ -564,27 +565,33 @@ namespace SoftCircuits.EasyEncryption
         {
             public Func<Encryption, object, string> Encrypt { get; set; }
             public Func<Encryption, string, object> Decrypt { get; set; }
+
+            public TypeInfo(Func<Encryption, object, string> encrypt, Func<Encryption, string, object> decrypt)
+            {
+                Encrypt = encrypt;
+                Decrypt = decrypt;
+            }
         }
 
         private static readonly Dictionary<Type, TypeInfo> TypeInfoLookup = new Dictionary<Type, TypeInfo>()
         {
-            [typeof(String)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((String)v), Decrypt = (e, s) => e.DecryptString(s) },
-            [typeof(Boolean)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Boolean)v), Decrypt = (e, s) => e.DecryptBoolean(s) },
-            [typeof(Char)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Char)v), Decrypt = (e, s) => e.DecryptChar(s) },
-            [typeof(SByte)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((SByte)v), Decrypt = (e, s) => e.DecryptSByte(s) },
-            [typeof(Byte)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Byte)v), Decrypt = (e, s) => e.DecryptByte(s) },
-            [typeof(Int16)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Int16)v), Decrypt = (e, s) => e.DecryptInt16(s) },
-            [typeof(UInt16)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((UInt16)v), Decrypt = (e, s) => e.DecryptUInt16(s) },
-            [typeof(Int32)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Int32)v), Decrypt = (e, s) => e.DecryptInt32(s) },
-            [typeof(UInt32)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((UInt32)v), Decrypt = (e, s) => e.DecryptUInt32(s) },
-            [typeof(Int64)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Int64)v), Decrypt = (e, s) => e.DecryptInt64(s) },
-            [typeof(UInt64)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((UInt64)v), Decrypt = (e, s) => e.DecryptUInt64(s) },
-            [typeof(Single)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Single)v), Decrypt = (e, s) => e.DecryptSingle(s) },
-            [typeof(Double)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Double)v), Decrypt = (e, s) => e.DecryptDouble(s) },
-            [typeof(Decimal)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Decimal)v), Decrypt = (e, s) => e.DecryptDecimal(s) },
-            [typeof(DateTime)] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((DateTime)v), Decrypt = (e, s) => e.DecryptDateTime(s) },
-            [typeof(Byte[])] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((Byte[])v), Decrypt = (e, s) => e.DecryptByteArray(s) },
-            [typeof(String[])] = new TypeInfo { Encrypt = (e, v) => e.Encrypt((String[])v), Decrypt = (e, s) => e.DecryptStringArray(s) },
+            [typeof(String)] = new TypeInfo((e, v) => e.Encrypt((String)v), (e, s) => e.DecryptString(s)),
+            [typeof(Boolean)] = new TypeInfo((e, v) => e.Encrypt((Boolean)v), (e, s) => e.DecryptBoolean(s)),
+            [typeof(Char)] = new TypeInfo((e, v) => e.Encrypt((Char)v), (e, s) => e.DecryptChar(s)),
+            [typeof(SByte)] = new TypeInfo((e, v) => e.Encrypt((SByte)v), (e, s) => e.DecryptSByte(s)),
+            [typeof(Byte)] = new TypeInfo((e, v) => e.Encrypt((Byte)v), (e, s) => e.DecryptByte(s)),
+            [typeof(Int16)] = new TypeInfo((e, v) => e.Encrypt((Int16)v), (e, s) => e.DecryptInt16(s)),
+            [typeof(UInt16)] = new TypeInfo((e, v) => e.Encrypt((UInt16)v), (e, s) => e.DecryptUInt16(s)),
+            [typeof(Int32)] = new TypeInfo((e, v) => e.Encrypt((Int32)v), (e, s) => e.DecryptInt32(s)),
+            [typeof(UInt32)] = new TypeInfo((e, v) => e.Encrypt((UInt32)v), (e, s) => e.DecryptUInt32(s)),
+            [typeof(Int64)] = new TypeInfo((e, v) => e.Encrypt((Int64)v), (e, s) => e.DecryptInt64(s)),
+            [typeof(UInt64)] = new TypeInfo((e, v) => e.Encrypt((UInt64)v), (e, s) => e.DecryptUInt64(s)),
+            [typeof(Single)] = new TypeInfo((e, v) => e.Encrypt((Single)v), (e, s) => e.DecryptSingle(s)),
+            [typeof(Double)] = new TypeInfo((e, v) => e.Encrypt((Double)v), (e, s) => e.DecryptDouble(s)),
+            [typeof(Decimal)] = new TypeInfo((e, v) => e.Encrypt((Decimal)v), (e, s) => e.DecryptDecimal(s)),
+            [typeof(DateTime)] = new TypeInfo((e, v) => e.Encrypt((DateTime)v), (e, s) => e.DecryptDateTime(s)),
+            [typeof(Byte[])] = new TypeInfo((e, v) => e.Encrypt((Byte[])v), (e, s) => e.DecryptByteArray(s)),
+            [typeof(String[])] = new TypeInfo((e, v) => e.Encrypt((String[])v), (e, s) => e.DecryptStringArray(s)),
         };
 
         /// <summary>
@@ -604,11 +611,11 @@ namespace SoftCircuits.EasyEncryption
         /// <param name="value">Object to be encrypted.</param>
         /// <exception cref="ArgumentException"><paramref name="value"/> holds an unsupported data type.</exception>
         /// <returns>An encrypted string that can be decrypted using Decrypt.</returns>
-        public string Encrypt(object value)
+        public string? Encrypt(object value)
         {
             if (value == null)
                 return null;
-            if (TypeInfoLookup.TryGetValue(value.GetType(), out TypeInfo info))
+            if (TypeInfoLookup.TryGetValue(value.GetType(), out TypeInfo? info))
                 return info.Encrypt(this, value);
             throw new ArgumentException(string.Format("Cannot encrypt value : Data type '{0}' is not supported", value.GetType()));
         }
@@ -622,7 +629,7 @@ namespace SoftCircuits.EasyEncryption
         /// <returns>Returns the decrypted value.</returns>
         public object Decrypt(string encryptedValue, Type targetType)
         {
-            if (TypeInfoLookup.TryGetValue(targetType, out TypeInfo info))
+            if (TypeInfoLookup.TryGetValue(targetType, out TypeInfo? info))
                 return info.Decrypt(this, encryptedValue);
             throw new ArgumentException(string.Format("Cannot decrypt value : Data type '{0}' is not supported", targetType));
         }
@@ -637,7 +644,16 @@ namespace SoftCircuits.EasyEncryption
         /// <returns>
         /// Returns the created SymmetricAlgorithm instance.
         /// </returns>
-        protected SymmetricAlgorithm CreateAlgorithm() => AlgorithmType.GetMethod("Create", new Type[0]).Invoke(null, null) as SymmetricAlgorithm;
+        protected SymmetricAlgorithm CreateAlgorithm()
+        {
+            MethodInfo? method = AlgorithmType.GetMethod("Create", Array.Empty<Type>());
+            if (method != null)
+            {
+                if (method.Invoke(null, null) is SymmetricAlgorithm algorithm)
+                    return algorithm;
+            }
+            throw new Exception($"Unable to create instance of {AlgorithmType.FullName}.");
+        }
 
         /// <summary>
         /// Generates a salt that contains a cryptographically strong sequence of random values.

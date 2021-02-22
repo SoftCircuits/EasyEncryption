@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2019-2020 Jonathan Wood (www.softcircuits.com)
+﻿// Copyright (c) 2019-2021 Jonathan Wood (www.softcircuits.com)
 // Licensed under the MIT license.
 //
 using System;
@@ -18,8 +18,8 @@ namespace SoftCircuits.EasyEncryption
     /// </remarks>
     public class EncryptionWriter : BinaryWriter, IDisposable
     {
-        private SymmetricAlgorithm Algorithm;
-        private ICryptoTransform Encryptor;
+        private readonly SymmetricAlgorithm Algorithm;
+        private readonly ICryptoTransform Encryptor;
 
         internal EncryptionWriter(SymmetricAlgorithm algorithm, ICryptoTransform encryptor, Stream stream) : base(stream)
         {
@@ -45,10 +45,8 @@ namespace SoftCircuits.EasyEncryption
         /// <param name="value"><c>byte[]</c> values to write.</param>
         public new void Write(byte[] value)
         {
-            int count = value?.Length ?? 0;
-            Write((Int32)count);
-            if (count > 0)
-                Write(value, 0, count);
+            Write((Int32)value.Length);
+            Write(value, 0, value.Length);
         }
 
         /// <summary>
@@ -57,9 +55,8 @@ namespace SoftCircuits.EasyEncryption
         /// <param name="value"><c>string[]</c> values to write.</param>
         public void Write(string[] value)
         {
-            int count = value?.Length ?? 0;
-            Write((Int32)count);
-            for (int i = 0; i < count; i++)
+            Write((Int32)value.Length);
+            for (int i = 0; i < value.Length; i++)
                 Write(value[i]);
         }
 
@@ -94,8 +91,6 @@ namespace SoftCircuits.EasyEncryption
                     Encryptor.Dispose();
                     Algorithm.Dispose();
                 }
-                Algorithm = null;
-                Encryptor = null;
             }
         }
 
